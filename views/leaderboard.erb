@@ -6,7 +6,7 @@
 </head>
 <body>
  <h1>NFL Leaderboard</h1>
- <ol><% each do |team| %>
-  <li><%= team %></li>
+ <ol><% @leaderboard.each do |team| %>
+  <li><%= puts "#{team.to_s} with #{team[:win].to_s} wins and #{team[:loss].to_s}" %></li>
  </ol>
 </body>
