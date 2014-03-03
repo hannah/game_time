@@ -9,8 +9,7 @@
 
  <ol>
    <% @leaderboard2.each do |team| %>
-     <li><%= team %></li>
-    <li><%= puts "#{team} with #{@puppies} wins and #{@llamas} losses." %></li>
+     <li><%= "#{team[:name]}, Wins: #{team[:wins]}, Losses: #{team[:losses]}" %></li>
   <% end %>
  </ol>
 </body>
