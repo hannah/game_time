@@ -35,25 +35,25 @@ matches = [
 
 #probably should refactor to use a method
 matches.each do |match|
- home = {match.fetch(:home_team) => {:win => 0 , :loss => 0}}
-    leaderboard.merge!(home)
- away = {match.fetch(:away_team) => {:win => 0 , :loss => 0}}
-    leaderboard.merge!(away)
+  home = {match.fetch(:home_team) => {:win => 0 , :loss => 0}}
+  leaderboard.merge!(home)
+  away = {match.fetch(:away_team) => {:win => 0 , :loss => 0}}
+  leaderboard.merge!(away)
 end
 
 
 #could probably use a method within this but no time to refactor it currently
 matches.each do |playoff|
- if playoff.fetch(:home_score).to_i > playoff.fetch(:away_score).to_i
-   winner = playoff.fetch(:home_team)
-   loser  = playoff.fetch(:away_team)
-   leaderboard[winner][:win] +=1
-   leaderboard[loser][:loss] +=1
- else
-   winner = playoff.fetch(:away_team)
-   loser  = playoff.fetch(:home_team)
-   leaderboard[winner][:win] +=1
-   leaderboard[loser][:loss] +=1
+  if playoff.fetch(:home_score).to_i > playoff.fetch(:away_score).to_i
+    winner = playoff.fetch(:home_team)
+    loser  = playoff.fetch(:away_team)
+    leaderboard[winner][:win] +=1
+    leaderboard[loser][:loss] +=1
+  else
+    winner = playoff.fetch(:away_team)
+    loser  = playoff.fetch(:home_team)
+    leaderboard[winner][:win] +=1
+    leaderboard[loser][:loss] +=1
   end
 end
 
@@ -62,4 +62,3 @@ end
 leaderboard2 = leaderboard.sort_by { |key, value| [value[:win], -value[:loss]] }.reverse
 leaderboard3 = leaderboard2.sort_by
 binding.pry
-
