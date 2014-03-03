@@ -41,23 +41,25 @@ get '/leaderboard' do
   end
 
   #could probably use a method within this but no time to refactor it currently
-  matches.each do |playoff|
-    if playoff.fetch(:home_score).to_i > playoff.fetch(:away_score).to_i
-      winner = playoff.fetch(:home_team)
-      loser  = playoff.fetch(:away_team)
-      leaderboard[winner][:win] +=1
-      leaderboard[loser][:loss] +=1
+  matches.each do |match|
+    if match[:home_score] > match[:away_score]
+      winner = leaderboard.find { |team| team[:name] == match[:home_team] }
+      loser = leaderboard.find { |team| team[:name] == match[:away_team] }
+
+      winner[:win] += 1
+      loser[:loss] += 1
     else
-      winner = playoff.fetch(:away_team)
-      loser  = playoff.fetch(:home_team)
-      leaderboard[winner][:win] +=1
-      leaderboard[loser][:loss] +=1
+      winner = leaderboard.find { |team| team[:name] == match[:away_team] }
+      loser = leaderboard.find { |team| team[:name] == match[:home_team] }
+
+      winner[:win] += 1
+      loser[:loss] += 1
     end
   end
 
   #|k,v| [-v,k] is what i need to implement
 
-  @leaderboard2 = leaderboard.sort_by { |key, value| [value[:win], -value[:loss]] }.reverse
+  @leaderboard2 = leaderboard.sort_by { |team| [-team[:wins], team[:losses]] }
   # leaderboard3 = leaderboard2.sort_by
   # binding.pry
 
