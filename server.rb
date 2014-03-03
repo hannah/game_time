@@ -33,8 +33,8 @@ get '/leaderboard' do
 
   #probably should refactor to use a method
   matches.each do |match|
-    home = { name: match.fetch(:home_team), win: 0 , loss: 0}
-    away = { name: match.fetch(:away_team), win: 0 , loss: 0}
+    home = { name: match.fetch(:home_team), wins: 0 , losses: 0}
+    away = { name: match.fetch(:away_team), wins: 0 , losses: 0}
     leaderboard << home
     leaderboard << away
     leaderboard.uniq!
