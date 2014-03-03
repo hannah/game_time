@@ -1,6 +1,10 @@
 require 'sinatra'
 require 'pry'
 
+def find_team(teams, team_name)
+  teams.find { |team| team[:name] == team_name }
+end
+
 get '/leaderboard' do
   leaderboard = []
   matches = [
@@ -43,14 +47,14 @@ get '/leaderboard' do
   #could probably use a method within this but no time to refactor it currently
   matches.each do |match|
     if match[:home_score] > match[:away_score]
-      winner = leaderboard.find { |team| team[:name] == match[:home_team] }
-      loser = leaderboard.find { |team| team[:name] == match[:away_team] }
+      winner = find_team(leaderboard, match[:home_team])
+      loser = find_team(leaderboard, match[:away_team])
 
       winner[:win] += 1
       loser[:loss] += 1
     else
-      winner = leaderboard.find { |team| team[:name] == match[:away_team] }
-      loser = leaderboard.find { |team| team[:name] == match[:home_team] }
+      winner = find_team(leaderboard, match[:away_team])
+      loser = find_team(leaderboard, match[:home_team])
 
       winner[:win] += 1
       loser[:loss] += 1
