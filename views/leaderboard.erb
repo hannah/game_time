@@ -6,11 +6,11 @@
 </head>
 <body>
  <h1>NFL Leaderboard</h1>
- <ol><% @leaderboard2.each do |team| %>
-     <% @kittens =  team[0]%>
-     <% @puppies = team[1][:win] %>
-     <% @llamas = team[1][:loss] %>
-  <li><%= puts "#{@kittens} with #{@puppies} wins and #{@llamas} losses." %></li>
+
+ <ol>
+   <% @leaderboard2.each do |team| %>
+     <li><%= team %></li>
+    <li><%= puts "#{team} with #{@puppies} wins and #{@llamas} losses." %></li>
   <% end %>
  </ol>
 </body>

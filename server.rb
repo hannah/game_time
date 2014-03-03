@@ -2,7 +2,7 @@ require 'sinatra'
 require 'pry'
 
 get '/leaderboard' do
-  leaderboard = {}
+  leaderboard = []
   matches = [
     {
       home_team: "Patriots",
@@ -33,12 +33,12 @@ get '/leaderboard' do
 
   #probably should refactor to use a method
   matches.each do |match|
-    home = {match.fetch(:home_team) => {:win => 0 , :loss => 0}}
-    leaderboard.merge!(home)
-    away = {match.fetch(:away_team) => {:win => 0 , :loss => 0}}
-    leaderboard.merge!(away)
+    home = { name: match.fetch(:home_team), win: 0 , loss: 0}
+    away = { name: match.fetch(:away_team), win: 0 , loss: 0}
+    leaderboard << home
+    leaderboard << away
+    leaderboard.uniq!
   end
-
 
   #could probably use a method within this but no time to refactor it currently
   matches.each do |playoff|
