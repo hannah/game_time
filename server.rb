@@ -1,8 +1,7 @@
-# require 'sinatra'
+require 'sinatra'
 require 'pry'
+get '/leaderboard' do
 
-# get '/leaderboard' do
-# erb :index
 
 leaderboard = {}
 matches = [
@@ -57,9 +56,8 @@ matches.each do |playoff|
   end
 end
 
-#|k,v| [-v,k] is what i need to implement
 
-leaderboard2 = leaderboard.sort_by { |key, value| [value[:win], -value[:loss]] }.reverse
-leaderboard3 = leaderboard2.sort_by
-binding.pry
 
+@leaderboard2 = leaderboard.sort_by { |key, value| [value[:win], -value[:loss]] }.reverse
+erb :index
+end

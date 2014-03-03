@@ -8,9 +8,9 @@
  <h1>NFL Leaderboard</h1>
  <ol><% @leaderboard2.each do |team| %>
      <% @kittens =  team[0]%>
-     <% @puppies = team[1][:win] %>
-     <% @llamas = team[1][:loss] %>
-  <li><%= puts "#{@kittens} with #{@puppies} wins and #{@llamas} losses." %></li>
+     <% @puppies = (team[1][:win]).to_s %>
+     <% @llamas = (team[1][:loss]).to_s %>
+  <li><%= "#{@kittens} #{@puppies} #{@llamas}" %></li>
   <% end %>
  </ol>
 </body>
