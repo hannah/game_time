@@ -1,8 +1,6 @@
 # require 'sinatra'
 require 'pry'
 leaderboard = {}
-puppies = []
-kittens = []
 matches = [
   {
     home_team: "Patriots",
@@ -30,11 +28,6 @@ matches = [
   }
 ]
 
-
-#go through the array matches
-#find all of the team names
-#these don't need to be if statements, could probably just state them. something to go back over and fix.
-#if leaderboard.select {|team| team[match.fetch(:home_team)]}
 matches.each do |match|
   home = {match.fetch(:home_team) => {:win => 0 , :loss => 0}}
     leaderboard.merge!(home)
@@ -47,34 +40,22 @@ end
 matches.each do |playoff|
  if playoff.fetch(:home_score).to_i > playoff.fetch(:away_score).to_i
    winner = playoff.fetch(:home_team)
-   loser = playoff.fetch(:away_team)
+   loser  = playoff.fetch(:away_team)
    leaderboard[winner][:win] +=1
-   #leaderboard[loser][:loss] +=1
+   leaderboard[loser][:loss] +=1
  else
    winner = playoff.fetch(:away_team)
-   loser = playoff.fetch(:home_team)
+   loser  = playoff.fetch(:home_team)
    leaderboard[winner][:win] +=1
-   #leaderboard[loser][:loss] +=1
-   #binding.pry
-   #puts winner
-#   #find :home_team in leaderboard
-#     #retrieve value of losses from leaderboard.to_i +=1
-#     #.merge! new value to :loss
-#   #find :away_team in leaderboard
-#     #retrieve value of :wins from leaderboard.to_i +=1
-#     #.merge! new value to :wins
- end
+   leaderboard[loser][:loss] +=1
+  end
 end
-binding.pry
+
+
+
 #so after all of this we should have leaderboard = [{teams win loss}]
 #leaderboard2 = leaderboard.sort_by {http://www.gethourglass.com/blog/ruby-how-to-sort-a-hash.html}
 
-
-#yay sorting please work!
-
-#puts leaderboard2
-
-#puts leaderboard
 
 
 
