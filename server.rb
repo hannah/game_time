@@ -1,6 +1,6 @@
 # require 'sinatra'
 require 'pry'
-leaderboard = Hash.new
+leaderboard = {}
 puppies = []
 kittens = []
 matches = [
@@ -34,40 +34,29 @@ matches = [
 #go through the array matches
 #find all of the team names
 #these don't need to be if statements, could probably just state them. something to go back over and fix.
+#if leaderboard.select {|team| team[match.fetch(:home_team)]}
 matches.each do |match|
-  home = match[:home_team]
-   if leaderboard.select {|team| team[match.fetch(:home_team)]}
-     team = {match.fetch(:home_team) => {:win => 0 , :loss => 0}}
-     team.merge(leaderboard)
-   end
-   if away = match.fetch(:away_team)
-    #leaderboard <<
-     team = {match.fetch(:away_team) => {:win => 0 , :loss => 0}}
-     team.merge(leaderboard)
-   end
+  home = {match.fetch(:home_team) => {:win => 0 , :loss => 0}}
+    leaderboard.merge!(home)
+  away = {match.fetch(:away_team) => {:win => 0 , :loss => 0}}
+    leaderboard.merge!(home)
 end
 
-#if the team name exists, ignore it
-#leaderboard = leaderboard.uniq
-puts leaderboard
-#go through the array matches
+
+
 matches.each do |playoff|
  if playoff.fetch(:home_score).to_i > playoff.fetch(:away_score).to_i
    winner = playoff.fetch(:home_team)
    loser = playoff.fetch(:away_team)
-
-   #leaderboard(get_value(:home_team))(:win)) +=1
-   puts winner
-#      #puts match[:win] = (leaderboard.fetch(:win)).to_i += 1.to_i
-#     #retrieve value of :wins from leaderboard.to_i +=1
-#     #.merge! new value to :wins
-#   #find :away_team in leaderboard
-#    #retrieve value of losses from leaderboard.to_i +=1
-#    #.merge! new value to :loss
+   leaderboard[winner][:win] +=1
+   #leaderboard[loser][:loss] +=1
  else
    winner = playoff.fetch(:away_team)
    loser = playoff.fetch(:home_team)
-   puts winner
+   leaderboard[winner][:win] +=1
+   #leaderboard[loser][:loss] +=1
+   #binding.pry
+   #puts winner
 #   #find :home_team in leaderboard
 #     #retrieve value of losses from leaderboard.to_i +=1
 #     #.merge! new value to :loss
@@ -76,6 +65,7 @@ matches.each do |playoff|
 #     #.merge! new value to :wins
  end
 end
+binding.pry
 #so after all of this we should have leaderboard = [{teams win loss}]
 #leaderboard2 = leaderboard.sort_by {http://www.gethourglass.com/blog/ruby-how-to-sort-a-hash.html}
 
@@ -87,6 +77,16 @@ end
 #puts leaderboard
 
 
+
+
+#leaderboard(get_value(:home_team))(:win)) +=1
+   #puts winner
+#      #puts match[:win] = (leaderboard.fetch(:win)).to_i += 1.to_i
+#     #retrieve value of :wins from leaderboard.to_i +=1
+#     #.merge! new value to :wins
+#   #find :away_team in leaderboard
+#    #retrieve value of losses from leaderboard.to_i +=1
+#    #.merge! new value to :loss
 
 
 
