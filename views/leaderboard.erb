@@ -8,7 +8,7 @@
  <h1>NFL Leaderboard</h1>
 
  <ol>
-   <% @leaderboard2.each do |team| %>
+   <% @leaderboard.each do |team| %>
      <li><%= "#{team[:name]}, Wins: #{team[:wins]}, Losses: #{team[:losses]}" %></li>
   <% end %>
  </ol>
