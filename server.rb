@@ -49,16 +49,13 @@ get '/leaderboard' do
     if match[:home_score] > match[:away_score]
       winner = find_team(leaderboard, match[:home_team])
       loser = find_team(leaderboard, match[:away_team])
-
-      winner[:win] += 1
-      loser[:loss] += 1
     else
       winner = find_team(leaderboard, match[:away_team])
       loser = find_team(leaderboard, match[:home_team])
-
-      winner[:win] += 1
-      loser[:loss] += 1
     end
+
+    winner[:wins] += 1
+    loser[:losses] += 1
   end
 
   #|k,v| [-v,k] is what i need to implement
